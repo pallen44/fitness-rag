@@ -1,5 +1,6 @@
-export const dbPackageName = "@fitness-rag/db";
-
-export function createDbPlaceholder(): string {
-  return dbPackageName;
-}
+export {
+  createDatabaseClient,
+  getDatabaseUrl,
+  type DatabaseClient,
+  type DatabaseClientConfig,
+} from "./client.js";
