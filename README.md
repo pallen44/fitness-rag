@@ -26,3 +26,13 @@ corepack pnpm lint
 ```
 
 CI uses mock/test defaults and should not require hosted AI keys, live weather APIs, Garmin/Strava credentials, or paid services.
+
+## Agent Docs
+
+Codex agents should read `AGENTS.md` before making changes. The detailed operating docs live in:
+
+- `docs/agents/operating-guide.md`
+- `docs/agents/ownership.md`
+- `docs/agents/work-packet-template.md`
+- `docs/agents/pr-checklist.md`
+- `docs/architecture/module-boundaries.md`

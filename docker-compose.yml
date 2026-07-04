@@ -1,0 +1,25 @@
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    container_name: fitness-rag-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-fitness_rag}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-fitness_rag}
+      POSTGRES_DB: ${POSTGRES_DB:-fitness_rag}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - fitness_rag_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U ${POSTGRES_USER:-fitness_rag} -d ${POSTGRES_DB:-fitness_rag}",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  fitness_rag_postgres_data:
