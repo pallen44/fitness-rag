@@ -12,3 +12,13 @@ corepack pnpm install
 corepack pnpm typecheck
 corepack pnpm test
 ```
+
+## Agent Docs
+
+Codex agents should read `AGENTS.md` before making changes. The detailed operating docs live in:
+
+- `docs/agents/operating-guide.md`
+- `docs/agents/ownership.md`
+- `docs/agents/work-packet-template.md`
+- `docs/agents/pr-checklist.md`
+- `docs/architecture/module-boundaries.md`
