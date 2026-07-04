@@ -11,4 +11,18 @@ corepack prepare pnpm@9.15.4 --activate
 corepack pnpm install
 corepack pnpm typecheck
 corepack pnpm test
+corepack pnpm lint
 ```
+
+## CI Baseline
+
+GitHub Actions runs the same baseline commands for pull requests:
+
+```bash
+corepack pnpm install --frozen-lockfile
+corepack pnpm typecheck
+corepack pnpm test
+corepack pnpm lint
+```
+
+CI uses mock/test defaults and should not require hosted AI keys, live weather APIs, Garmin/Strava credentials, or paid services.
