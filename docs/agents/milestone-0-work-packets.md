@@ -1,401 +1,713 @@
-Current Milestone: Milestone 0 — Local-First Project SetupBecause the repository is still effectively empty, the current milestone should be Milestone 0 only.
+# Current Milestone: Milestone 0 - Local-First Project Setup
 
-Goal:
+Because the repository is still effectively empty, the current milestone should be Milestone 0 only.
 
-Create the local-first project foundation so you and Codex agents can work in parallel safely.Do not start product features yet.
+## Goal
 
-Ownership Split for This MilestoneYou Personally BuildYou own the AI/RAG foundation interfaces:
+Create the local-first project foundation so you and Codex agents can work in parallel safely.
 
-packages/ai/packages/rag-core/docs/pipeline/For Milestone 0, you should focus only on:
+Do not start product features yet.
 
-AI provider abstraction
+## Ownership Split for This Milestone
 
-Mock provider
+### You Personally Build
 
-Ollama provider stubs
+You own the AI/RAG foundation interfaces:
 
-Public RAG-core interface stubs
+- `packages/ai/`
+- `packages/rag-core/`
+- `docs/pipeline/`
 
-Pipeline docs
+For Milestone 0, you should focus only on:
 
-Codex Agents BuildCodex agents own the surrounding project foundation:
+- AI provider abstraction
+- Mock provider
+- Ollama provider stubs
+- Public RAG-core interface stubs
+- Pipeline docs
 
-apps/web/apps/api/packages/shared/packages/api-client/packages/db/docs/agents/docs/architecture/.github/root config filesFor Milestone 0, Codex should focus only on:
+### Codex Agents Build
 
-Monorepo setup
+Codex agents own the surrounding project foundation:
 
-App/API skeletons
+- `apps/web/`
+- `apps/api/`
+- `packages/shared/`
+- `packages/api-client/`
+- `packages/db/`
+- `docs/agents/`
+- `docs/architecture/`
+- `.github/`
+- root config files
 
-Local Docker/Postgres/pgvector setup
+For Milestone 0, Codex should focus only on:
 
-CI baseline
+- Monorepo setup
+- App/API skeletons
+- Local Docker/Postgres/pgvector setup
+- CI baseline
+- Agent operating docs
+- Shared type package skeleton
 
-Agent operating docs
+## Work Packet 0.1 - Monorepo Skeleton
 
-Shared type package skeleton
+### Owner
 
-Work Packet 0.1 — Monorepo SkeletonOwnerCodex agent
+Codex agent
 
-ObjectiveCreate the base monorepo structure, package manager setup, TypeScript config, and placeholder packages/apps.
+### Objective
 
-Background / ContextThe repo currently only has a minimal README. This packet creates the foundation for all future work.
+Create the base monorepo structure, package manager setup, TypeScript config, and placeholder packages/apps.
 
-DependenciesNone.
+### Background / Context
 
-InputsApproved project plan.
+The repo currently only has a minimal README. This packet creates the foundation for all future work.
 
-Outputsapps/web/apps/api/packages/shared/packages/api-client/packages/db/packages/ai/packages/rag-core/docs/package.jsonpnpm-workspace.yamltsconfig.base.json.gitignoreREADME.mdAllowed Files / Directories/apps/packages/docs/Forbidden Files / DirectoriesNone for this first packet, but the agent should only scaffold packages/ai and packages/rag-core; it should not implement AI/RAG internals.
+### Dependencies
 
-Acceptance Criteriapnpm install works.
+None.
 
-Root scripts exist:
+### Inputs
 
-dev
+Approved project plan.
 
-build
+### Outputs
 
-typecheck
+- `apps/web/`
+- `apps/api/`
+- `packages/shared/`
+- `packages/api-client/`
+- `packages/db/`
+- `packages/ai/`
+- `packages/rag-core/`
+- `docs/`
+- `package.json`
+- `pnpm-workspace.yaml`
+- `tsconfig.base.json`
+- `.gitignore`
+- `README.md`
 
-test
+### Allowed Files / Directories
 
-lint
+- `apps/`
+- `packages/`
+- `docs/`
 
-Placeholder packages compile.
+### Forbidden Files / Directories
 
-apps/web has a minimal runnable placeholder.
+None for this first packet, but the agent should only scaffold `packages/ai` and `packages/rag-core`; it should not implement AI/RAG internals.
 
-apps/api has a minimal runnable placeholder.
+### Acceptance Criteria
 
-packages/ai and packages/rag-core exist but contain only placeholder exports or TODOs.
+- `pnpm install` works.
+- Root scripts exist:
+  - `dev`
+  - `build`
+  - `typecheck`
+  - `test`
+  - `lint`
+- Placeholder packages compile.
+- `apps/web` has a minimal runnable placeholder.
+- `apps/api` has a minimal runnable placeholder.
+- `packages/ai` and `packages/rag-core` exist but contain only placeholder exports or TODOs.
 
-Definition of DoneMonorepo structure exists.
+### Definition of Done
 
-Root README has basic setup instructions.
+- Monorepo structure exists.
+- Root README has basic setup instructions.
+- No real product logic added.
+- No AI/RAG pipeline implementation added by Codex.
 
-No real product logic added.
+### Suggested Tests / Checks
 
-No AI/RAG pipeline implementation added by Codex.
+- `pnpm install`
+- `pnpm typecheck`
+- `pnpm test`
 
-Suggested Tests / Checkspnpm installpnpm typecheckpnpm testReviewer ChecklistDid the agent keep this as scaffolding only?
+### Reviewer Checklist
 
-Did it avoid implementing RAG/AI internals?
+- Did the agent keep this as scaffolding only?
+- Did it avoid implementing RAG/AI internals?
+- Are package boundaries clear?
+- Can future agents work from this structure?
 
-Are package boundaries clear?
+## Work Packet 0.2 - Agent Operating Docs
 
-Can future agents work from this structure?
+### Owner
 
-Work Packet 0.2 — Agent Operating DocsOwnerCodex agent
+Codex agent
 
-ObjectiveCreate documentation that defines how Codex agents should work in the repo.
+### Objective
 
-Background / ContextMultiple autonomous Codex agents will work in parallel. They need explicit boundaries and PR expectations.
+Create documentation that defines how Codex agents should work in the repo.
 
-DependenciesCan run after or alongside WP-0.1, but should be reconciled with the final folder structure.
+### Background / Context
 
-InputsApproved ownership split.
+Multiple autonomous Codex agents will work in parallel. They need explicit boundaries and PR expectations.
 
-OutputsAGENTS.mddocs/agents/operating-guide.mddocs/agents/ownership.mddocs/agents/work-packet-template.mddocs/agents/pr-checklist.mddocs/architecture/module-boundaries.mdAllowed Files / DirectoriesAGENTS.mddocs/agents/docs/architecture/README.mdForbidden Files / Directoriespackages/rag-core/packages/ai/apps/web/apps/api/Acceptance CriteriaDocs clearly state:
+### Dependencies
 
-You own packages/ai.
+Can run after or alongside WP-0.1, but should be reconciled with the final folder structure.
 
-You own packages/rag-core.
+### Inputs
 
-Codex agents must not implement RAG internals.
+Approved ownership split.
 
-Codex agents must call only public exports from packages/rag-core/src/index.ts.
+### Outputs
 
-One work packet equals one PR.
+- `AGENTS.md`
+- `docs/agents/operating-guide.md`
+- `docs/agents/ownership.md`
+- `docs/agents/work-packet-template.md`
+- `docs/agents/pr-checklist.md`
+- `docs/architecture/module-boundaries.md`
 
-Agents must stay inside allowed file scopes.
+### Allowed Files / Directories
 
-Agents must add tests for implementation packets.
+- `AGENTS.md`
+- `docs/agents/`
+- `docs/architecture/`
+- `README.md`
 
-Agents must use mock AI providers in tests.
+### Forbidden Files / Directories
 
-Definition of DoneAgent instructions are clear enough for future Codex agents to follow without extra explanation.
+- `packages/rag-core/`
+- `packages/ai/`
+- `apps/web/`
+- `apps/api/`
 
-PR checklist exists.
+### Acceptance Criteria
 
-Work packet template exists.
+Docs clearly state:
 
-Module boundary document exists.
+- You own `packages/ai`.
+- You own `packages/rag-core`.
+- Codex agents must not implement RAG internals.
+- Codex agents must call only public exports from `packages/rag-core/src/index.ts`.
+- One work packet equals one PR.
+- Agents must stay inside allowed file scopes.
+- Agents must add tests for implementation packets.
+- Agents must use mock AI providers in tests.
 
-Suggested Tests / ChecksNo code tests required.
+### Definition of Done
+
+- Agent instructions are clear enough for future Codex agents to follow without extra explanation.
+- PR checklist exists.
+- Work packet template exists.
+- Module boundary document exists.
+
+### Suggested Tests / Checks
+
+No code tests required.
 
 Suggested check:
 
-pnpm typecheckif available after WP-0.1.
+- `pnpm typecheck` if available after WP-0.1.
 
-Reviewer ChecklistAre ownership boundaries explicit?
+### Reviewer Checklist
 
-Are forbidden areas clear?
+- Are ownership boundaries explicit?
+- Are forbidden areas clear?
+- Does the doc prevent agents from modifying RAG internals?
+- Does the PR checklist enforce scope control?
 
-Does the doc prevent agents from modifying RAG internals?
+## Work Packet 0.3 - Local Database Foundation
 
-Does the PR checklist enforce scope control?
+### Owner
 
-Work Packet 0.3 — Local Database FoundationOwnerCodex agent
+Codex agent
 
-ObjectiveAdd local PostgreSQL + pgvector development setup and a minimal database package skeleton.
+### Objective
 
-Background / ContextThe MVP depends on PostgreSQL and pgvector. This packet should set up local infrastructure but not design the full schema yet.
+Add local PostgreSQL + pgvector development setup and a minimal database package skeleton.
 
-DependenciesWP-0.1.
+### Background / Context
 
-InputsApproved stack:
+The MVP depends on PostgreSQL and pgvector. This packet should set up local infrastructure but not design the full schema yet.
 
-PostgreSQL
+### Dependencies
 
-pgvector
+WP-0.1.
 
-local Docker Compose
+### Inputs
 
-Drizzle or Prisma
+Approved stack:
 
-Outputsdocker-compose.yml.env.examplepackages/db/packages/db/src/client.tspackages/db/src/schema/packages/db/README.mdAllowed Files / Directoriesdocker-compose.yml.env.examplepackages/db/package.jsonForbidden Files / Directoriespackages/rag-core/packages/ai/apps/web/apps/api/Acceptance CriteriaLocal PostgreSQL service is defined.
+- PostgreSQL
+- pgvector
+- local Docker Compose
+- Drizzle or Prisma
 
-pgvector extension is supported or documented.
+### Outputs
 
-Database package exports a placeholder client.
+- `docker-compose.yml`
+- `.env.example`
+- `packages/db/`
+- `packages/db/src/client.ts`
+- `packages/db/src/schema/`
+- `packages/db/README.md`
 
-Environment variables are documented.
+### Allowed Files / Directories
 
-No full product schema is added yet unless minimal placeholders are required.
+- `docker-compose.yml`
+- `.env.example`
+- `packages/db/`
+- `package.json`
 
-Definition of DoneDeveloper can start local database.
+### Forbidden Files / Directories
 
-DB package has clear TODOs for future schema work.
+- `packages/rag-core/`
+- `packages/ai/`
+- `apps/web/`
+- `apps/api/`
 
-No RAG logic added.
+### Acceptance Criteria
 
-Suggested Tests / Checksdocker compose up -d dbpnpm typecheckReviewer ChecklistIs this local-first?
+- Local PostgreSQL service is defined.
+- pgvector extension is supported or documented.
+- Database package exports a placeholder client.
+- Environment variables are documented.
+- No full product schema is added yet unless minimal placeholders are required.
 
-Does it avoid paid services?
+### Definition of Done
 
-Is pgvector included or documented?
+- Developer can start local database.
+- DB package has clear TODOs for future schema work.
+- No RAG logic added.
 
-Is the schema intentionally minimal?
+### Suggested Tests / Checks
 
-Work Packet 0.4 — CI BaselineOwnerCodex agent
+- `docker compose up -d db`
+- `pnpm typecheck`
 
-ObjectiveAdd CI for install, typecheck, lint, and tests.
+### Reviewer Checklist
 
-Background / ContextEvery future agent PR needs a reliable quality gate.
+- Is this local-first?
+- Does it avoid paid services?
+- Is pgvector included or documented?
+- Is the schema intentionally minimal?
 
-DependenciesWP-0.1.
+## Work Packet 0.4 - CI Baseline
 
-InputsRoot package scripts from monorepo skeleton.
+### Owner
 
-Outputs.github/workflows/ci.ymlPotentially updated:
+Codex agent
 
-package.jsonAllowed Files / Directories.github/package.jsonForbidden Files / Directoriespackages/rag-core/packages/ai/apps/web/src/features/apps/api/src/modules/Acceptance CriteriaCI runs:
+### Objective
 
-install
+Add CI for install, typecheck, lint, and tests.
 
-typecheck
+### Background / Context
 
-tests
+Every future agent PR needs a reliable quality gate.
 
-lint if configured
+### Dependencies
+
+WP-0.1.
+
+### Inputs
+
+Root package scripts from monorepo skeleton.
+
+### Outputs
+
+- `.github/workflows/ci.yml`
+
+Potentially updated:
+
+- `package.json`
+
+### Allowed Files / Directories
+
+- `.github/`
+- `package.json`
+
+### Forbidden Files / Directories
+
+- `packages/rag-core/`
+- `packages/ai/`
+- `apps/web/src/features/`
+- `apps/api/src/modules/`
+
+### Acceptance Criteria
+
+CI runs:
+
+- install
+- typecheck
+- tests
+- lint if configured
 
 CI must not require:
 
-Hosted AI API keys
+- Hosted AI API keys
+- Live weather APIs
+- Garmin/Strava credentials
+- Paid services
 
-Live weather APIs
+### Definition of Done
 
-Garmin/Strava credentials
+- CI workflow exists.
+- CI uses mock/test defaults.
+- README or docs mention local equivalent commands.
 
-Paid services
+### Suggested Tests / Checks
 
-Definition of DoneCI workflow exists.
+- `pnpm typecheck`
+- `pnpm test`
+- `pnpm lint`
 
-CI uses mock/test defaults.
+### Reviewer Checklist
 
-README or docs mention local equivalent commands.
+- Does CI avoid external paid dependencies?
+- Does it match local commands?
+- Is it fast enough for frequent agent PRs?
 
-Suggested Tests / Checkspnpm typecheckpnpm testpnpm lintReviewer ChecklistDoes CI avoid external paid dependencies?
+## Work Packet 0.5 - Web App Shell
 
-Does it match local commands?
+### Owner
 
-Is it fast enough for frequent agent PRs?
+Codex agent
 
-Work Packet 0.5 — Web App ShellOwnerCodex agent
+### Objective
 
-ObjectiveCreate a minimal frontend shell with navigation placeholders.
+Create a minimal frontend shell with navigation placeholders.
 
-Background / ContextThe app needs a visible shell before profile, activities, and recommendations are implemented.
+### Background / Context
 
-DependenciesWP-0.1.
+The app needs a visible shell before profile, activities, and recommendations are implemented.
 
-InputsApproved product sections:
+### Dependencies
 
-Dashboard
+WP-0.1.
 
-Profile
+### Inputs
 
-Activities
+Approved product sections:
 
-Imports
+- Dashboard
+- Profile
+- Activities
+- Imports
+- Training
+- Adventures
+- Recommendations
 
-Training
+### Outputs
 
-Adventures
+`apps/web/`
 
-Recommendations
+Pages or routes for:
 
-Outputsapps/web/Pages or routes for:
+- `/dashboard`
+- `profile`
+- `activities`
+- `imports`
+- `training`
+- `adventures`
+- `recommendations`
 
-/dashboardprofileactivitiesimportstrainingadventuresrecommendationsAllowed Files / Directoriesapps/web/packages/ui/packages/shared/Forbidden Files / Directoriespackages/rag-core/packages/ai/packages/db/apps/api/Acceptance CriteriaWeb app runs locally.
+### Allowed Files / Directories
 
-Navigation works.
+- `apps/web/`
+- `packages/ui/`
+- `packages/shared/`
 
-Placeholder pages exist.
+### Forbidden Files / Directories
 
-No backend dependency required yet.
+- `packages/rag-core/`
+- `packages/ai/`
+- `packages/db/`
+- `apps/api/`
 
-No RAG/AI logic included.
+### Acceptance Criteria
 
-Definition of DoneUI shell is usable.
+- Web app runs locally.
+- Navigation works.
+- Placeholder pages exist.
+- No backend dependency required yet.
+- No RAG/AI logic included.
 
-Empty placeholder content is clear.
+### Definition of Done
 
-Screenshot should be included in PR if possible.
+- UI shell is usable.
+- Empty placeholder content is clear.
+- Screenshot should be included in PR if possible.
 
-Suggested Tests / Checkspnpm typecheckpnpm testpnpm devReviewer ChecklistDid the agent avoid backend and RAG changes?
+### Suggested Tests / Checks
 
-Are routes aligned with the approved plan?
+- `pnpm typecheck`
+- `pnpm test`
+- `pnpm dev`
 
-Is the shell simple and not overdesigned?
+### Reviewer Checklist
 
-Work Packet 0.6 — API Service ShellOwnerCodex agent
+- Did the agent avoid backend and RAG changes?
+- Are routes aligned with the approved plan?
+- Is the shell simple and not overdesigned?
 
-ObjectiveCreate a minimal backend API shell with health check and route/module structure.
+## Work Packet 0.6 - API Service Shell
 
-Background / ContextFuture product APIs need consistent validation, error handling, and module organization.
+### Owner
 
-DependenciesWP-0.1.
+Codex agent
 
-InputsApproved backend structure.
+### Objective
 
-Outputsapps/api/apps/api/src/modules/apps/api/src/routes/Initial endpoint:
+Create a minimal backend API shell with health check and route/module structure.
 
-GET /healthAllowed Files / Directoriesapps/api/packages/shared/packages/api-client/Forbidden Files / Directoriespackages/rag-core/packages/ai/apps/web/Acceptance CriteriaAPI starts locally.
+### Background / Context
 
-GET /health returns success.
+Future product APIs need consistent validation, error handling, and module organization.
 
-Basic error handling exists.
+### Dependencies
 
-Basic validation pattern is documented or stubbed.
+WP-0.1.
 
-No product modules implemented yet.
+### Inputs
 
-Definition of DoneAPI shell is ready for future modules.
+Approved backend structure.
 
-Health test exists.
+### Outputs
 
-No RAG/AI logic included.
+- `apps/api/`
+- `apps/api/src/modules/`
+- `apps/api/src/routes/`
 
-Suggested Tests / Checkspnpm typecheckpnpm testReviewer ChecklistIs this minimal?
+Initial endpoint:
 
-Are future module folders clear?
+- `GET /health`
 
-Does it avoid implementing product logic too early?
+### Allowed Files / Directories
 
-Work Packet 0.7 — AI Provider Interface FoundationOwnerYou
+- `apps/api/`
+- `packages/shared/`
+- `packages/api-client/`
 
-ObjectiveCreate the AI provider abstraction that allows switching between Ollama, hosted providers, and mock providers.
+### Forbidden Files / Directories
 
-Background / ContextThe app must support local-first AI development with Ollama while preserving the ability to use hosted APIs later.
+- `packages/rag-core/`
+- `packages/ai/`
+- `apps/web/`
 
-DependenciesWP-0.1 preferred, but you can draft this independently.
+### Acceptance Criteria
 
-InputsApproved provider interface design.
+- API starts locally.
+- `GET /health` returns success.
+- Basic error handling exists.
+- Basic validation pattern is documented or stubbed.
+- No product modules implemented yet.
 
-Outputspackages/ai/src/providers/types.tspackages/ai/src/providers/mockProvider.tspackages/ai/src/providers/ollamaChatProvider.tspackages/ai/src/providers/ollamaEmbeddingProvider.tspackages/ai/src/registry.tspackages/ai/src/index.tsAllowed Files / Directoriespackages/ai/docs/pipeline/Forbidden Files / Directoriesapps/web/apps/api/packages/rag-core/ internals unless adding TODO integration notesAcceptance CriteriaChatModelProvider interface exists.
+### Definition of Done
 
-EmbeddingProvider interface exists.
+- API shell is ready for future modules.
+- Health test exists.
+- No RAG/AI logic included.
 
-Mock provider works in tests.
+### Suggested Tests / Checks
 
-Ollama provider can be configured by environment variables.
+- `pnpm typecheck`
+- `pnpm test`
 
-Hosted provider is stubbed or minimally implemented behind the same interface.
+### Reviewer Checklist
 
-No application logic depends directly on Ollama.
+- Is this minimal?
+- Are future module folders clear?
+- Does it avoid implementing product logic too early?
 
-Definition of DoneUnit tests cover mock provider.
+## Work Packet 0.7 - AI Provider Interface Foundation
 
-Ollama provider has a smoke-test path or documented manual check.
+### Owner
 
-Provider registry supports:
+You
 
-local
+### Objective
 
-hosted
+Create the AI provider abstraction that allows switching between Ollama, hosted providers, and mock providers.
 
-mock
+### Background / Context
 
-Suggested Tests / Checkspnpm typecheckpnpm testOptional manual check:
+The app must support local-first AI development with Ollama while preserving the ability to use hosted APIs later.
 
-ollama listReviewer ChecklistCan app logic remain provider-agnostic?
+### Dependencies
 
-Are tests independent from live Ollama?
+WP-0.1 preferred, but you can draft this independently.
 
-Is hosted provider swappable later?
+### Inputs
 
-Are environment variables documented?
+Approved provider interface design.
 
-Work Packet 0.8 — RAG Core Public Interface StubsOwnerYou
+### Outputs
 
-ObjectiveCreate public RAG-core interface stubs that Codex agents can call or mock.
+- `packages/ai/src/providers/types.ts`
+- `packages/ai/src/providers/mockProvider.ts`
+- `packages/ai/src/providers/ollamaChatProvider.ts`
+- `packages/ai/src/providers/ollamaEmbeddingProvider.ts`
+- `packages/ai/src/registry.ts`
+- `packages/ai/src/index.ts`
 
-Background / ContextCodex agents need a stable integration point before the full pipeline exists.
+### Allowed Files / Directories
 
-DependenciesWP-0.1 preferred.
+- `packages/ai/`
+- `docs/pipeline/`
 
-InputsApproved RAG-core public interface.
+### Forbidden Files / Directories
 
-Outputspackages/rag-core/src/index.tspackages/rag-core/src/types.tsdocs/pipeline/rag-core-interface.mdAllowed Files / Directoriespackages/rag-core/docs/pipeline/packages/shared/ only if shared types are neededForbidden Files / Directoriesapps/web/apps/api/Acceptance CriteriaPublic functions exist as stubs or mock-safe implementations:
+- `apps/web/`
+- `apps/api/`
+- `packages/rag-core/` internals unless adding TODO integration notes
 
-ingestActivityData(...)generateTrainingRecommendation(...)generateAdventureRecommendation(...)buildRecommendationContext(...)searchMemories(...)storeMemory(...)Types exist for:
+### Acceptance Criteria
 
-IngestActivityInputIngestActivityResultTrainingRecommendationInputAdventureRecommendationInputAIRecommendationRecommendationContextMemoryRecordDefinition of DoneCodex agents can import public functions from packages/rag-core.
+- `ChatModelProvider` interface exists.
+- `EmbeddingProvider` interface exists.
+- Mock provider works in tests.
+- Ollama provider can be configured by environment variables.
+- Hosted provider is stubbed or minimally implemented behind the same interface.
+- No application logic depends directly on Ollama.
 
-Internal directories can remain TODOs.
+### Definition of Done
 
-Stub outputs are clearly marked as temporary.
+- Unit tests cover mock provider.
+- Ollama provider has a smoke-test path or documented manual check.
+- Provider registry supports:
+  - `local`
+  - `hosted`
+  - `mock`
 
-No real pipeline implementation required yet.
+### Suggested Tests / Checks
 
-Suggested Tests / Checkspnpm typecheckpnpm testReviewer ChecklistIs the public API stable enough for Codex integration?
+- `pnpm typecheck`
+- `pnpm test`
 
-Are internals hidden?
+Optional manual check:
 
-Are stub outputs safe for UI/API development?
+- `ollama list`
 
-Is the interface documented?
+### Reviewer Checklist
 
-Recommended Parallelization for Current MilestoneStart FirstWP-0.1 Monorepo SkeletonThis should land before most other packets.
+- Can app logic remain provider-agnostic?
+- Are tests independent from live Ollama?
+- Is hosted provider swappable later?
+- Are environment variables documented?
 
-Can Run After WP-0.1WP-0.2 Agent Operating DocsWP-0.3 Local Database FoundationWP-0.4 CI BaselineWP-0.5 Web App ShellWP-0.6 API Service ShellWP-0.7 AI Provider Interface FoundationWP-0.8 RAG Core Public Interface StubsBest Parallel Agent AssignmentCodex Agent A: WP-0.2 Agent Operating DocsCodex Agent B: WP-0.3 Local Database FoundationCodex Agent C: WP-0.4 CI BaselineCodex Agent D: WP-0.5 Web App ShellCodex Agent E: WP-0.6 API Service Shell
+## Work Packet 0.8 - RAG Core Public Interface Stubs
 
-You: WP-0.7 AI Provider Interface FoundationYou: WP-0.8 RAG Core Public Interface StubsCurrent Milestone Exit CriteriaMilestone 0 is complete when:
+### Owner
 
-Monorepo exists.
+You
 
-Local database can start.
+### Objective
 
-Web shell runs.
+Create public RAG-core interface stubs that Codex agents can call or mock.
 
-API shell runs.
+### Background / Context
 
-CI baseline exists.
+Codex agents need a stable integration point before the full pipeline exists.
 
-Agent docs exist.
+### Dependencies
 
-packages/ai has provider interfaces.
+WP-0.1 preferred.
 
-packages/rag-core has public interface stubs.
+### Inputs
 
-Codex agents know what they can and cannot modify.
+Approved RAG-core public interface.
+
+### Outputs
+
+- `packages/rag-core/src/index.ts`
+- `packages/rag-core/src/types.ts`
+- `docs/pipeline/rag-core-interface.md`
+
+### Allowed Files / Directories
+
+- `packages/rag-core/`
+- `docs/pipeline/`
+- `packages/shared/` only if shared types are needed
+
+### Forbidden Files / Directories
+
+- `apps/web/`
+- `apps/api/`
+
+### Acceptance Criteria
+
+Public functions exist as stubs or mock-safe implementations:
+
+- `ingestActivityData(...)`
+- `generateTrainingRecommendation(...)`
+- `generateAdventureRecommendation(...)`
+- `buildRecommendationContext(...)`
+- `searchMemories(...)`
+- `storeMemory(...)`
+
+Types exist for:
+
+- `IngestActivityInput`
+- `IngestActivityResult`
+- `TrainingRecommendationInput`
+- `AdventureRecommendationInput`
+- `AIRecommendation`
+- `RecommendationContext`
+- `MemoryRecord`
+
+### Definition of Done
+
+- Codex agents can import public functions from `packages/rag-core`.
+- Internal directories can remain TODOs.
+- Stub outputs are clearly marked as temporary.
+- No real pipeline implementation required yet.
+
+### Suggested Tests / Checks
+
+- `pnpm typecheck`
+- `pnpm test`
+
+### Reviewer Checklist
+
+- Is the public API stable enough for Codex integration?
+- Are internals hidden?
+- Are stub outputs safe for UI/API development?
+- Is the interface documented?
+
+## Recommended Parallelization for Current Milestone
+
+### Start First
+
+WP-0.1 Monorepo Skeleton
+
+This should land before most other packets.
+
+### Can Run After WP-0.1
+
+- WP-0.2 Agent Operating Docs
+- WP-0.3 Local Database Foundation
+- WP-0.4 CI Baseline
+- WP-0.5 Web App Shell
+- WP-0.6 API Service Shell
+- WP-0.7 AI Provider Interface Foundation
+- WP-0.8 RAG Core Public Interface Stubs
+
+### Best Parallel Agent Assignment
+
+- Codex Agent A: WP-0.2 Agent Operating Docs
+- Codex Agent B: WP-0.3 Local Database Foundation
+- Codex Agent C: WP-0.4 CI Baseline
+- Codex Agent D: WP-0.5 Web App Shell
+- Codex Agent E: WP-0.6 API Service Shell
+- You: WP-0.7 AI Provider Interface Foundation
+- You: WP-0.8 RAG Core Public Interface Stubs
+
+## Current Milestone Exit Criteria
+
+Milestone 0 is complete when:
+
+- Monorepo exists.
+- Local database can start.
+- Web shell runs.
+- API shell runs.
+- CI baseline exists.
+- Agent docs exist.
+- `packages/ai` has provider interfaces.
+- `packages/rag-core` has public interface stubs.
+- Codex agents know what they can and cannot modify.
